@@ -4,12 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <fragment
-        android:tag="frag_camera"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:name="com.commonsware.cwac.camera.CameraFragment" />
-
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
