@@ -7,4 +7,10 @@
         <item name="android:windowFullscreen">true</item>
     </style>
 
+    <style name="justgirlytext"
+        xmlns:myapp="http://schemas.android.com/apk/res-auto">
+        <item name="myapp:customFont">jgtfont.ttf</item>
+        <item name="android:textSize">32sp</item>
+    </style>
+
 </resources>

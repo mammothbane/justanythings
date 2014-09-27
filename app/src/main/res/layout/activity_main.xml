@@ -7,12 +7,17 @@
 
     <RelativeLayout
         android:orientation="vertical"
-        android:id="@+id/ll_photo"
+        android:id="@+id/rl_photo"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"
-        android:layout_above="@+id/ll_buttons"
-        android:padding="36dp">
+        android:layout_above="@+id/ll_buttons">
+
+        <fragment
+            android:tag="frag_camera"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:name="com.commonsware.cwac.camera.CameraFragment" />
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -24,6 +29,56 @@
             android:layout_height="match_parent"
             android:id="@+id/iv_image"
             android:layout_centerInParent="true" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/et_title"
+            android:layout_centerHorizontal="true"
+            android:text="your text here"
+            android:maxLines="3"
+            android:layout_margin="36dp"
+            android:textSize="32sp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/rl_jgt"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="42dp">
+
+            <TextView
+                style="@style/justgirlytext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="just"
+                android:maxLines="1"
+                android:id="@+id/tv_start"
+                android:layout_toLeftOf="@+id/et_name"
+                android:layout_alignParentBottom="true" />
+
+            <EditText
+                style="@style/justgirlytext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/et_name"
+                android:maxLines="1"
+                android:background="@android:color/transparent"
+                android:text="girly"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentBottom="true" />
+
+            <TextView
+                style="@style/justgirlytext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="things"
+                android:maxLines="1"
+                android:id="@+id/tv_end"
+                android:layout_toRightOf="@+id/et_name"
+                android:layout_alignParentBottom="true" />
+        </LinearLayout>
 
     </RelativeLayout>
 
