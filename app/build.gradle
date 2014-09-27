@@ -40,5 +40,11 @@ dependencies {
     compile 'com.tumblr:jumblr:0.0.6'
     compile 'com.squareup.dagger:dagger:1.2.2'
     compile 'com.jakewharton:butterknife:5.1.2'
-    compile 'com.commonsware.cwac:camera:0.6.8'
+    compile('com.commonsware.cwac:camera-v9:0.6.+') {
+        exclude module: 'support-v4'
+    }
+    compile 'com.actionbarsherlock:actionbarsherlock:4.4.0@aar'
+
+
+    compile 'com.android.support:support-v4:20.0.0'
 }

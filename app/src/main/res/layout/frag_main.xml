@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        android:text="Main Fragment"
+        android:id="@+id/textView"
+        android:layout_gravity="center_horizontal"
+        android:layout_centerHorizontal="true" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/iv_image"
+        android:layout_centerHorizontal="true" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/rl_overlay"
+        android:visibility="gone">
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/et_title"
+            android:layout_centerHorizontal="true"
+            android:text="your text here"
+            android:maxLines="3"
+            android:layout_margin="36dp"
+            android:textSize="32sp"
+            android:singleLine="false"
+            android:gravity="center_horizontal" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ib_take"
+            android:text="take photo"
+            android:singleLine="true"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="30dp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/rl_jgt"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="24dp"
+            android:layout_above="@+id/ib_take">
+
+            <TextView
+                style="@style/justgirlytext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/secondary_text_dark"
+                android:text="just"
+                android:maxLines="1"
+                android:id="@+id/tv_start"
+                android:layout_toLeftOf="@+id/et_name"
+                android:layout_alignParentBottom="true" />
+
+            <EditText
+                style="@style/justgirlytext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/et_name"
+                android:maxLines="1"
+                android:background="@android:color/transparent"
+                android:text="girly"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentBottom="true" />
+
+            <TextView
+                style="@style/justgirlytext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/secondary_text_dark"
+                android:text="things"
+                android:maxLines="1"
+                android:id="@+id/tv_end"
+                android:layout_toRightOf="@+id/et_name"
+                android:layout_alignParentBottom="true" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+</RelativeLayout>

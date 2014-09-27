@@ -1,35 +1,50 @@
 package com.mammothbane.justanythings.activities;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.view.View;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 
-import com.commonsware.cwac.camera.CameraFragment;
-import com.commonsware.cwac.camera.CameraHost;
-import com.commonsware.cwac.camera.SimpleCameraHost;
+import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.mammothbane.justanythings.R;
+import com.mammothbane.justanythings.fragments.MainFragment;
+import com.mammothbane.justanythings.fragments.TumblrFragment;
 
 import butterknife.ButterKnife;
-import butterknife.OnClick;
+import butterknife.InjectView;
 
 /**
  * Created by mammothbane on 9/26/2014.
  */
-public class MainActivity extends Activity {
+public class MainActivity extends SherlockFragmentActivity {
 
-    CameraFragment cameraFragment;
-    CameraHost cameraHost;
+    @InjectView(R.id.vp_main)
+    ViewPager viewPager;
+
+    Fragment[] fragments = { new com.mammothbane.justanythings.fragments.CameraFragment(), new MainFragment(), new TumblrFragment()};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.inject(this);
-        cameraFragment = (CameraFragment)getFragmentManager().findFragmentByTag("frag_camera");
-        cameraHost = new SimpleCameraHost.Builder(this).useFrontFacingCamera(false).photoDirectory(getCacheDir()).useFullBleedPreview(true).build();
-        cameraFragment.setHost(cameraHost);
+
+        viewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
+            @Override
+            public Fragment getItem(int i) {
+                return fragments[i];
+            }
+
+            @Override
+            public int getCount() {
+                return 3;
+            }
+        });
+
+        viewPager.setCurrentItem(1);
+
     }
 
 
@@ -43,16 +58,5 @@ public class MainActivity extends Activity {
     }
 
 
-    @OnClick(R.id.ib_choose)
-    public void choosePhoto(View view) {
-        Intent intent = new Intent();
-
-    }
-
-    @OnClick(R.id.ib_take)
-    public void takePhoto(View view) {
-
-
-    }
 
 }

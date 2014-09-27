@@ -1,13 +1,10 @@
 package com.mammothbane.justanythings.views;
 
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.widget.TextView;
-
-import com.mammothbane.justanythings.R;
 
 /**
  * Created by mammothbane on 9/26/2014.
@@ -30,10 +27,7 @@ public class CustomTextView extends TextView {
     }
 
     private void setCustomFont(Context ctx, AttributeSet attrs) {
-        TypedArray a = ctx.obtainStyledAttributes(attrs, R.styleable.CustomTextView);
-        String customFont = a.getString(R.styleable.CustomTextView_customFont);
-        setCustomFont(ctx, customFont);
-        a.recycle();
+        setCustomFont(ctx, "jgtfont.ttf");
     }
 
     public boolean setCustomFont(Context ctx, String asset) {
