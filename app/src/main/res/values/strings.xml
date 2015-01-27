@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">justanythings</string>
+    <string name="cam_err">Camera Unavailable</string>
 </resources>

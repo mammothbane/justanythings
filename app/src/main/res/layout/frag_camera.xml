@@ -9,5 +9,12 @@
         android:layout_height="match_parent"
         android:id="@+id/fl_camera"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:textSize="32sp"
+        android:text="@string/cam_err"
+        android:id="@+id/tv_cam_err"/>
 
 </RelativeLayout>

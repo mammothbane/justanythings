@@ -8,8 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
-import com.commonsware.cwac.camera.CameraView;
 import com.mammothbane.justanythings.R;
 import com.mammothbane.justanythings.views.CameraPreview;
 
@@ -22,21 +22,30 @@ import butterknife.InjectView;
 public class CameraFragment extends Fragment {
 
     @InjectView(R.id.fl_camera) FrameLayout frameLayout;
+    @InjectView(R.id.tv_cam_err) TextView tvError;
 
     Camera camera;
-
-    CameraView cameraView;
 
     @Override
     public void onResume() {
         super.onResume();
+        hideCameraError();
         camera = getCamera();
-        cameraView = new CameraView(getActivity());
+        if (camera != null) {
+            frameLayout.addView(new CameraPreview(getActivity(), camera));
+        } else {
+            showCameraError();
+            frameLayout.removeAllViews();
+        }
+
     }
 
     @Override
     public void onPause() {
         super.onPause();
+        if (frameLayout.getChildCount() > 0) {
+            frameLayout.removeAllViews();
+        }
         if (camera != null) {
             camera.release();
             camera = null;
@@ -45,19 +54,24 @@ public class CameraFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = super.onCreateView(inflater, container, savedInstanceState);
+        View view = inflater.inflate(R.layout.frag_camera, container, false);
         ButterKnife.inject(this, view);
-
-        frameLayout.addView(new CameraPreview(getActivity(), camera));
-
         return view;
+    }
+
+    public void showCameraError() {
+        tvError.setVisibility(View.VISIBLE);
+    }
+
+    public void hideCameraError() {
+        tvError.setVisibility(View.GONE);
     }
 
     @Nullable
     static Camera getCamera() {
         Camera c = null;
         try {
-            Camera.open();
+            c = Camera.open();
         } catch (Exception ignore) {}
         return c;
     }
