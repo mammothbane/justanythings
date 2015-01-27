@@ -21,9 +21,10 @@ import butterknife.InjectView;
 public class MainActivity extends SherlockFragmentActivity {
 
     @InjectView(R.id.vp_main)
-    ViewPager viewPager;
+    protected ViewPager viewPager;
 
-    Fragment[] fragments = { new com.mammothbane.justanythings.fragments.CameraFragment(), new MainFragment(), new TumblrFragment()};
+
+    private Fragment[] fragments = { new com.mammothbane.justanythings.fragments.CameraFragment(), new MainFragment(), new TumblrFragment()};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

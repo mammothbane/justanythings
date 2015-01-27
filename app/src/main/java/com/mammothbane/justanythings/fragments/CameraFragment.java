@@ -13,6 +13,9 @@ import android.widget.TextView;
 import com.mammothbane.justanythings.R;
 import com.mammothbane.justanythings.views.CameraPreview;
 
+import javax.inject.Inject;
+import javax.inject.Provider;
+
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
@@ -24,13 +27,23 @@ public class CameraFragment extends Fragment {
     @InjectView(R.id.fl_camera) FrameLayout frameLayout;
     @InjectView(R.id.tv_cam_err) TextView tvError;
 
+    @Inject
+    Provider<Camera> cameraProvider;
+
     Camera camera;
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        //App app = App.get();
+        //App.get().inject(this);
+    }
 
     @Override
     public void onResume() {
         super.onResume();
         hideCameraError();
-        camera = getCamera();
+        camera = cameraProvider.get();
         if (camera != null) {
             frameLayout.addView(new CameraPreview(getActivity(), camera));
         } else {
@@ -67,12 +80,4 @@ public class CameraFragment extends Fragment {
         tvError.setVisibility(View.GONE);
     }
 
-    @Nullable
-    static Camera getCamera() {
-        Camera c = null;
-        try {
-            c = Camera.open();
-        } catch (Exception ignore) {}
-        return c;
-    }
 }
