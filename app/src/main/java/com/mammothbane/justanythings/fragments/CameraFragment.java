@@ -121,7 +121,7 @@ public class CameraFragment extends Fragment {
     }
 
     private File getOutputMediaFile() {
-        return new File(getActivity().getCacheDir().getPath() + File.separator + "img" + UUID.randomUUID());
+        return new File(getActivity().getCacheDir().getPath() + File.separator + "img" + UUID.randomUUID() + ".jpg");
     }
 
 }
