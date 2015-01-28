@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">justanythings</string>
     <string name="cam_err">Camera Unavailable</string>
+    <string name="bt_select">Select Photo</string>
 </resources>

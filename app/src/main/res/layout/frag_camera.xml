@@ -17,4 +17,13 @@
         android:text="@string/cam_err"
         android:id="@+id/tv_cam_err"/>
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:id="@+id/bt_photo"
+        android:text="take photo"/>
+
 </RelativeLayout>

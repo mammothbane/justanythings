@@ -19,6 +19,15 @@
         android:id="@+id/iv_image"
         android:layout_centerHorizontal="true" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/bt_select"
+        android:text="@string/bt_select"
+        android:singleLine="true"
+        android:layout_centerInParent="true"
+        />
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -37,23 +46,12 @@
             android:singleLine="false"
             android:gravity="center_horizontal" />
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/ib_take"
-            android:text="take photo"
-            android:singleLine="true"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="30dp" />
-
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/rl_jgt"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="24dp"
-            android:layout_above="@+id/ib_take">
+            android:layout_marginBottom="24dp">
 
             <TextView
                 style="@style/justgirlytext"
@@ -64,7 +62,8 @@
                 android:maxLines="1"
                 android:id="@+id/tv_start"
                 android:layout_toLeftOf="@+id/et_name"
-                android:layout_alignParentBottom="true" />
+                android:layout_alignParentBottom="true"
+                android:layout_toStartOf="@+id/et_name" />
 
             <EditText
                 style="@style/justgirlytext"
@@ -86,7 +85,8 @@
                 android:maxLines="1"
                 android:id="@+id/tv_end"
                 android:layout_toRightOf="@+id/et_name"
-                android:layout_alignParentBottom="true" />
+                android:layout_alignParentBottom="true"
+                android:layout_toEndOf="@+id/et_name" />
 
         </LinearLayout>
 

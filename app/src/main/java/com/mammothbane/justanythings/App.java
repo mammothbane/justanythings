@@ -2,7 +2,6 @@ package com.mammothbane.justanythings;
 
 import android.app.Application;
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 import com.mammothbane.justanythings.core.CameraModule;
 import com.mammothbane.justanythings.core.JumblrModule;
@@ -20,10 +19,9 @@ public class App extends Application {
 
     @Override
     public void onCreate() {
+        super.onCreate();
         instance = this;
         inject(this);
-        Log.d("app", "INJECTED");
-        super.onCreate();
     }
 
     public static void inject(Object dep) {

@@ -7,6 +7,7 @@ package com.mammothbane.justanythings.views;
 import android.content.Context;
 import android.hardware.Camera;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
@@ -16,6 +17,19 @@ import java.io.IOException;
 public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback {
     private SurfaceHolder mHolder;
     private Camera mCamera;
+    private boolean surfaceExists = false;
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        if (mCamera == null) return super.onTouchEvent(event);
+        mCamera.autoFocus(new Camera.AutoFocusCallback() {
+            @Override
+            public void onAutoFocus(boolean b, Camera camera) {
+                autoFocusComplete();
+            }
+        });
+        return super.onTouchEvent(event);
+    }
 
     public CameraPreview(Context context, Camera camera) {
         super(context);
@@ -28,20 +42,34 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
 
     }
 
+    public void startPreview() {
+        if (surfaceExists) {
+            mCamera.startPreview();
+            mCamera.startFaceDetection();
+        } else throw new IllegalStateException("no preview surface exists");
+    }
+
+    void autoFocusComplete() {
+        Log.d(getClass().getSimpleName(), "autofocus complete");
+
+    }
+
     public void surfaceCreated(SurfaceHolder holder) {
         // The Surface has been created, now tell the camera where to draw the preview.
+        surfaceExists = true;
         if (mCamera == null) return;
         try {
             mCamera.setDisplayOrientation(90);
             mCamera.setPreviewDisplay(holder);
-            mCamera.startPreview();
+
         } catch (IOException e) {
             Log.d(getClass().getSimpleName(), "Error setting camera preview: " + e.getMessage());
         }
     }
 
     public void surfaceDestroyed(SurfaceHolder holder) {
-        // empty. Take care of releasing the Camera preview in your activity.
+        // empty. Take care of releasing the Camera preview in your activity
+        surfaceExists = false;
     }
 
     public void surfaceChanged(SurfaceHolder holder, int format, int w, int h) {

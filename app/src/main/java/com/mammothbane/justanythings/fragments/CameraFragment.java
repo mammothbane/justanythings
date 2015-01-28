@@ -8,12 +8,21 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.mammothbane.justanythings.App;
 import com.mammothbane.justanythings.R;
+import com.mammothbane.justanythings.activities.MainActivity;
 import com.mammothbane.justanythings.views.CameraPreview;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Date;
+import java.util.UUID;
 
 import javax.inject.Inject;
 import javax.inject.Provider;
@@ -28,6 +37,7 @@ public class CameraFragment extends Fragment {
 
     @InjectView(R.id.fl_camera) FrameLayout frameLayout;
     @InjectView(R.id.tv_cam_err) TextView tvError;
+    @InjectView(R.id.bt_photo) Button btPhoto;
 
     @Inject
     Provider<Camera> cameraProvider;
@@ -37,7 +47,6 @@ public class CameraFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        Log.d("cfrag", "this fragment" + this);
         App.inject(this);
     }
 
@@ -67,10 +76,39 @@ public class CameraFragment extends Fragment {
         }
     }
 
+    void captureImage() {
+        if (camera == null) throw new NullPointerException("camera was null.");
+        final Date now = new Date();
+
+        camera.takePicture(null, null, new Camera.PictureCallback() {
+            @Override
+            public void onPictureTaken(byte[] bytes, Camera camera) {
+                try {
+                    FileOutputStream fos = new FileOutputStream(getOutputMediaFile());
+                    fos.write(bytes);
+                    fos.close();
+                } catch (FileNotFoundException e) {
+                } catch (IOException e) {
+                }
+                Log.d(getClass().getSimpleName(), "image taken. delay " + ((new Date().getTime() - now.getTime())) + "ms.");
+                camera.startPreview();
+            }
+        });
+
+        ((MainActivity) getActivity()).waitForImage();
+
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.frag_camera, container, false);
         ButterKnife.inject(this, view);
+        btPhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                captureImage();
+            }
+        });
         return view;
     }
 
@@ -80,6 +118,10 @@ public class CameraFragment extends Fragment {
 
     public void hideCameraError() {
         tvError.setVisibility(View.GONE);
+    }
+
+    private File getOutputMediaFile() {
+        return new File(getActivity().getCacheDir().getPath() + File.separator + "img" + UUID.randomUUID());
     }
 
 }

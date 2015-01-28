@@ -58,6 +58,19 @@ public class MainActivity extends SherlockFragmentActivity {
         return getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA);
     }
 
+    public void setPane(int num) {
+        viewPager.setCurrentItem(num);
+    }
+
+    public void waitForImage() {
+        setPane(1);
+        //todo: start a spinner or something in MainFragment
+    }
+
+    public void stopWaiting() {
+        //todo: undo waitForImage
+
+    }
 
 
 }
