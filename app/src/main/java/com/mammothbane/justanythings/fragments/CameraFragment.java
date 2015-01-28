@@ -4,12 +4,14 @@ import android.hardware.Camera;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import com.mammothbane.justanythings.App;
 import com.mammothbane.justanythings.R;
 import com.mammothbane.justanythings.views.CameraPreview;
 
@@ -35,8 +37,8 @@ public class CameraFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        //App app = App.get();
-        //App.get().inject(this);
+        Log.d("cfrag", "this fragment" + this);
+        App.inject(this);
     }
 
     @Override

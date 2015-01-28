@@ -11,7 +11,7 @@ import dagger.Provides;
  * Created by mammothbane on 1/27/2015.
  */
 
-@Module(injects = JumblrClient.class)
+@Module( library = true )
 public class JumblrModule {
     @Provides @Singleton
     JumblrClient getJumblr() {

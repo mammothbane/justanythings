@@ -9,7 +9,7 @@ import dagger.Provides;
  * Created by mammothbane on 9/26/2014.
  */
 
-@Module ( injects = Application.class )
+@Module ( injects = Application.class, library = true )
 public class MainModule {
     private Application application;
 

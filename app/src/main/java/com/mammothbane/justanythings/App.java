@@ -1,6 +1,7 @@
 package com.mammothbane.justanythings;
 
 import android.app.Application;
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.mammothbane.justanythings.core.CameraModule;
@@ -15,22 +16,26 @@ import dagger.ObjectGraph;
 public class App extends Application {
 
     private static App instance;
-    private ObjectGraph graph;
+    private static ObjectGraph graph;
 
     @Override
     public void onCreate() {
         instance = this;
-        graph = ObjectGraph.create(new CameraModule(), new MainModule(this), new JumblrModule());
-        graph.inject(this);
+        inject(this);
         Log.d("app", "INJECTED");
         super.onCreate();
     }
 
-    public void inject(Object dep) {
+    public static void inject(Object dep) {
+        if (graph == null) {
+            graph = ObjectGraph.create(new JumblrModule(), new CameraModule(), new MainModule(instance));
+        }
         graph.inject(dep);
     }
 
+    @NonNull
     public static App get() {
-        return instance;
+        if (instance != null) return instance;
+        else throw new NullPointerException("app instance was null");
     }
 }
